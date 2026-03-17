@@ -1,0 +1,115 @@
+---
+import '../styles/global.css';
+
+interface Props {
+    title?: string;
+    description?: string;
+    image?: string;
+    canonical?: string;
+}
+
+const {
+    title = 'SNEAK SHOES | Tienda de Sneakers Urbanos y Deportivos',
+    description = 'SNEAK SHOES: sneakers urbanos y deportivos con atencion personalizada por WhatsApp. Consulta modelos, tallas y colores disponibles.',
+    image = '/favicon.webp',
+    canonical
+} = Astro.props as Props;
+
+const seoTitle = title;
+const seoDescription = description;
+const seoUrl = canonical ?? Astro.url?.href ?? '';
+const seoImage = image.startsWith('http')
+    ? image
+    : Astro.url
+        ? new URL(image, Astro.url.origin).href
+        : image;
+---
+
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="description" content={seoDescription} />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <meta name="author" content="SNEAK SHOES" />
+        <meta name="keywords" content="sneakers, zapatos deportivos, shoes, streetwear, tienda online" />
+        <meta name="theme-color" content="#b80018" />
+        <meta name="generator" content={Astro.generator} />
+
+        {seoUrl && <link rel="canonical" href={seoUrl} />}
+        <link rel="icon" type="image/webp" href="/favicon.webp" />
+        <link rel="shortcut icon" href="/favicon.webp" />
+        <link rel="apple-touch-icon" href="/favicon.webp" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="SNEAK SHOES" />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDescription} />
+        <meta property="og:url" content={seoUrl} />
+        <meta property="og:image" content={seoImage} />
+        <meta property="og:locale" content="es_ES" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDescription} />
+        <meta name="twitter:image" content={seoImage} />
+        <meta name="twitter:site" content="@sneakshoes" />
+
+        <title>{seoTitle}</title>
+    </head>
+    <body class="antialiased text-black" style="background-color: var(--color-primary);">
+        <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_15%_12%,rgba(255,255,255,0.18),transparent_45%),radial-gradient(circle_at_88%_82%,rgba(255,255,255,0.12),transparent_48%)]"></div>
+
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1500 250"
+                preserveAspectRatio="none"
+                class="hidden md:block absolute inset-0 w-full h-full opacity-55"
+                aria-hidden="true"
+            >
+                <defs>
+                    <linearGradient id="gradBottomDesktop" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.7" />
+                        <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                    </linearGradient>
+                </defs>
+                <g fill="url(#gradBottomDesktop)">
+                    <path d="M42 250L292 0L476.5 0L226.5 250z" />
+                    <path d="M283.5 250L533.5 0L589 0L339 250z" />
+                    <path d="M526 250L776 0L932 0L682 250z" />
+                    <path d="M776.5 250L1026.5 0L1185.5 0L935.5 250z" />
+                    <path d="M1498 250L1248 0L996 0L1246 250z" />
+                    <path d="M1237.5 250L987.5 0L725 0L975 250z" />
+                    <path d="M967 250L717 0L531 0L781 250z" />
+                    <path d="M744.5 250L494.5 0L155.5 0L405.5 250z" />
+                </g>
+            </svg>
+
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 600 780"
+                preserveAspectRatio="none"
+                class="md:hidden absolute inset-0 w-full h-full opacity-50"
+                aria-hidden="true"
+            >
+                <defs>
+                    <linearGradient id="gradBottomMobile" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.65" />
+                        <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                    </linearGradient>
+                </defs>
+                <g fill="url(#gradBottomMobile)">
+                    <path d="M-80 780L185 0h120L40 780z" />
+                    <path d="M145 780L405 0h86L231 780z" />
+                    <path d="M365 780L625 0h120L485 780z" />
+                </g>
+            </svg>
+        </div>
+
+        <main class="relative z-0">
+            <slot />
+        </main>
+    </body>
+</html>

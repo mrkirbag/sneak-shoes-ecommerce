@@ -1,0 +1,283 @@
+---
+import Layout from '../layouts/Layout.astro';
+import rawShoes from '../utils/shoes.json';
+import type { ShoeData, Product } from '../types/shop';
+import Cart from '../components/Cart';
+import Shoe from '../components/Shoe.astro';
+import Hero from '../components/Hero.astro';
+import Footer from '../components/Footer.astro';
+import FloatingCartButton from '../components/FloatingCartButton.astro';
+
+const shoes = rawShoes as ShoeData;
+const categories = Object.keys(shoes);
+---
+
+<Layout
+    title="SNEAK SHOES | Sneakers Urbanos y Deportivos"
+    description="Compra sneakers urbanos y deportivos en SNEAK SHOES. Explora colecciones, consulta tallas y colores disponibles y recibe atencion por WhatsApp."
+>
+
+	<main class="pt-0 overflow-x-clip">
+		<Hero />
+
+		<section id="products" class="py-10 sm:py-14 bg-transparent">
+			<div class="max-w-screen-2xl mx-auto px-4 sm:px-6">
+				<div class="text-center mb-7 sm:mb-8">
+					<h2 class="font-title font-black text-3xl sm:text-4xl mb-3 sm:mb-4 text-white">NUESTRA COLECCIÓN</h2>
+					<p class="font-text text-white/60 text-sm sm:text-base">ELIGE TU ESTILO</p>
+				</div>
+				<div class="filter-scroll flex flex-wrap justify-center gap-2 sm:gap-3 mb-2 px-1 pb-2">
+					<button id="filter-all" class="filter-btn px-4 sm:px-6 py-2.5 sm:py-3 bg-(--color-primary) text-white text-xs sm:text-sm font-text uppercase tracking-wider rounded-full hover:scale-105 transition-transform cursor-pointer">Todas</button>
+						{categories.map(cat => (
+							<button id={`filter-${cat.toLowerCase()}`} class="filter-btn px-4 sm:px-6 py-2.5 sm:py-3 bg-white text-black text-xs sm:text-sm font-text uppercase tracking-wider rounded-full hover:scale-105 transition-transform cursor-pointer">{cat}</button>
+						))}
+				</div>
+			</div>
+		</section>
+
+		<div id="products-container" class="max-w-screen-2xl mx-auto px-4 sm:px-6 pb-16 sm:pb-20 bg-transparent">
+			{categories.map((cat) => (
+				<section id={cat} class="scroll-mt-32 category-section mb-14 sm:mb-20" data-category={cat}>
+					<div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-8 sm:mb-12 border-b border-black pb-4 sm:pb-6">
+						<h2 class="font-title font-black text-xl sm:text-2xl uppercase tracking-tighter text-white" >{cat}</h2>
+						<span class="text-white/60 font-text text-xs sm:text-sm tracking-wider uppercase">COLECCIÓN 2026</span>
+					</div>
+					
+					<div class="category-grid grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 items-stretch">
+						{shoes[cat].map((shoe: Product, idx: number) => (
+							<div class="category-item" data-index={idx}>
+								<Shoe shoe={shoe} />
+							</div>
+						))}
+					</div>
+
+					<div class="mt-6 hidden lg:flex justify-center">
+						<button
+							type="button"
+							class="show-more-btn inline-flex items-center justify-center px-6 py-2.5 bg-black text-white text-xs font-title font-bold uppercase tracking-[0.18em] rounded-full hover:bg-(--color-primary) hover:shadow hover:shadow-black transition-colors cursor-pointer"
+						>
+							Ver más
+						</button>
+					</div>
+				</section>
+			))}
+		</div>
+	</main>
+
+	<Footer />
+
+	<FloatingCartButton />
+
+	<Cart client:load />
+
+	<script>
+		import { isCartOpen, addCartItem, cartItems } from '../store/cartStore';
+
+		const cartCounter = document.querySelector('#floating-cart-trigger div');
+		cartItems.subscribe(items => {
+		const count = Object.values(items).reduce((acc, i) => acc + i.quantity, 0);
+		if (cartCounter) cartCounter.textContent = count.toString();
+		});
+
+		document.getElementById('floating-cart-trigger')?.addEventListener('click', () => {
+		isCartOpen.set(true);
+		});
+
+		document.addEventListener('click', (event) => {
+			const target = event.target;
+			if (!(target instanceof Element)) return;
+
+			const addButton = target.closest<HTMLButtonElement>('.add-btn');
+			if (!addButton) return;
+
+			event.preventDefault();
+			event.stopPropagation();
+
+			const rawProduct = addButton.getAttribute('data-product');
+			if (!rawProduct) return;
+
+			const product = JSON.parse(rawProduct);
+			addCartItem(product);
+			isCartOpen.set(true);
+		});
+
+		// Filtrado por categoría con botones y layout balanceado
+		const sections = document.querySelectorAll('.category-section');
+		const filterButtons = document.querySelectorAll('.filter-btn');
+		const getDesktopColumns = () => {
+			if (window.matchMedia('(min-width: 1280px)').matches) return 4;
+			if (window.matchMedia('(min-width: 1024px)').matches) return 3;
+			return 0;
+		};
+
+		const getBalancedColumns = (itemCount: number, maxCols: number) => {
+			if (itemCount <= 0 || maxCols <= 1) return 1;
+
+			const minCols = maxCols >= 4 ? 3 : 2;
+			const candidates: Array<{ cols: number; empty: number }> = [];
+
+			for (let cols = minCols; cols <= Math.min(maxCols, itemCount); cols++) {
+				const remainder = itemCount % cols;
+				const hasOrphan = remainder === 1 && itemCount > cols;
+				if (hasOrphan) continue;
+
+				const rows = Math.ceil(itemCount / cols);
+				const empty = rows * cols - itemCount;
+				candidates.push({ cols, empty });
+			}
+
+			if (!candidates.length) return Math.min(maxCols, itemCount);
+
+			candidates.sort((a, b) => {
+				if (a.empty !== b.empty) return a.empty - b.empty;
+				return b.cols - a.cols;
+			});
+
+			return candidates[0].cols;
+		};
+
+		const getCategoryFromButtonId = (id: string) => id.replace('filter-', '').toLowerCase();
+
+		const applyCategoryVisibility = (section: Element, mode: 'preview' | 'expanded') => {
+			const items = section.querySelectorAll<HTMLElement>('.category-item');
+			const showMoreBtn = section.querySelector<HTMLButtonElement>('.show-more-btn');
+			const grid = section.querySelector<HTMLElement>('.category-grid');
+			const cols = getDesktopColumns();
+
+			if (grid) {
+				grid.style.removeProperty('--grid-columns');
+			}
+
+			if (cols === 0) {
+				items.forEach((item) => {
+					item.style.display = '';
+				});
+				if (showMoreBtn) showMoreBtn.style.display = 'none';
+				return;
+			}
+
+			if (mode === 'preview') {
+				const previewCount = cols;
+				if (grid) {
+					grid.style.setProperty('--grid-columns', String(cols));
+				}
+
+				items.forEach((item, index) => {
+					item.style.display = index < previewCount ? '' : 'none';
+				});
+
+				if (showMoreBtn) {
+					showMoreBtn.style.display = items.length > previewCount ? 'inline-flex' : 'none';
+				}
+				return;
+			}
+
+			const balancedCols = getBalancedColumns(items.length, cols);
+			if (grid) {
+				grid.style.setProperty('--grid-columns', String(balancedCols));
+			}
+
+			items.forEach((item) => {
+				item.style.display = '';
+			});
+
+			if (showMoreBtn) {
+				showMoreBtn.style.display = 'none';
+			}
+		};
+
+		const setupShowMorePerCategory = () => {
+			sections.forEach((section) => {
+				const showMoreBtn = section.querySelector<HTMLButtonElement>('.show-more-btn');
+				if (!showMoreBtn) return;
+				if (showMoreBtn.dataset.initialized === 'true') return;
+
+				showMoreBtn.dataset.initialized = 'true';
+				showMoreBtn.addEventListener('click', () => {
+					const category = (section as HTMLElement).dataset.category?.toLowerCase();
+					if (!category) return;
+					activeFilter = category;
+					setFilter(category);
+					requestAnimationFrame(() => {
+						(section as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'start' });
+					});
+				});
+			});
+		};
+
+		setupShowMorePerCategory();
+
+		const updateFilterButtonStyles = (filter: string) => {
+			filterButtons.forEach((button) => {
+				button.classList.remove('filter-active');
+				button.classList.add('filter-inactive');
+			});
+
+			const activeButton = filter === 'all'
+				? document.getElementById('filter-all')
+				: Array.from(filterButtons).find((button) => getCategoryFromButtonId((button as HTMLElement).id) === filter);
+
+			activeButton?.classList.remove('filter-inactive');
+			activeButton?.classList.add('filter-active');
+		};
+
+		const setFilter = (filter: string) => {
+			const normalizedFilter = filter.toLowerCase();
+			sections.forEach((section) => {
+				const category = section.getAttribute('data-category')?.toLowerCase();
+				const isVisible = normalizedFilter === 'all' || category === normalizedFilter;
+				(section as HTMLElement).style.display = isVisible ? 'block' : 'none';
+
+				if (!isVisible) return;
+				applyCategoryVisibility(section, normalizedFilter === 'all' ? 'preview' : 'expanded');
+			});
+
+			updateFilterButtonStyles(normalizedFilter);
+		};
+
+		let activeFilter = 'all';
+		setFilter(activeFilter);
+
+		window.addEventListener('resize', () => {
+			setFilter(activeFilter);
+		});
+
+		filterButtons.forEach(btn => {
+		btn.addEventListener('click', () => {
+			const filter = btn.id.replace('filter-', '');
+			activeFilter = filter;
+			setFilter(activeFilter);
+		});
+		});
+	</script>
+
+	<style>
+		.filter-scroll {
+			max-width: 52rem;
+			margin-inline: auto;
+		}
+
+		@media (max-width: 639px) {
+			.filter-btn {
+				flex: 0 1 calc((100% - 1rem) / 3);
+				max-width: 11rem;
+				text-align: center;
+			}
+		}
+
+		@media (min-width: 1024px) {
+			.category-grid {
+				grid-template-columns: repeat(var(--grid-columns, 3), minmax(0, 20rem));
+				justify-content: center;
+				justify-items: center;
+				align-items: stretch;
+			}
+
+			.category-item {
+				width: 100%;
+				max-width: 20rem;
+				height: 100%;
+			}
+		}
+	</style>
+</Layout>

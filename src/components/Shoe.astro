@@ -1,0 +1,134 @@
+---
+export interface Props {
+    shoe: import('../types/shop').Product;
+}
+
+const { shoe } = Astro.props;
+---
+
+<div class="group relative h-full w-full p-3 rounded-2xl transition-all duration-500 hover:bg-white/70 backdrop-blur-sm bg-white/10 flex flex-col">
+    <div class="image-carousel relative overflow-hidden bg-white/80 backdrop-blur-md aspect-square rounded-xl shadow-sm group-hover:shadow-xl transition-all duration-500 shrink-0">
+
+        {shoe.images.map((src, i) => (
+            <img
+                src={src}
+                alt={shoe.name}
+                class="carousel-img absolute inset-0 w-full h-full object-cover mix-blend-multiply transition-all duration-500 ease-out rounded-xl"
+                style={i === 0 ? "opacity: 1; pointer-events: auto;" : "opacity: 0; pointer-events: none;"}
+            />
+        ))}
+
+        <div class="absolute z-10 inset-x-0 bottom-0 p-4 translate-y-0 md:translate-y-full md:group-hover:translate-y-0 transition-transform duration-500 bg-linear-to-t from-white/90 to-transparent">
+            <button
+                type="button"
+                class="add-btn relative z-10 w-full bg-black text-white py-3 text-[10px] font-text tracking-widest uppercase hover:bg-(--color-primary) transition-all rounded-full cursor-pointer shadow-lg"
+                data-product={JSON.stringify(shoe)}
+            >
+                Añadir al Carrito
+            </button>
+        </div>
+    </div>
+
+    <div class="mt-4 px-1 flex-1 flex flex-col justify-between gap-2">
+        <div class="flex justify-between items-start gap-3 min-h-10">
+            <h3 class="text-xs font-black tracking-[0.15em] uppercase text-white group-hover:text-black transition-colors font-title leading-tight max-w-[75%] line-clamp-2">
+                {shoe.name}
+            </h3>
+            <span class="text-sm font-bold text-white font-text group-hover:text-black transition-colors shrink-0">${shoe.price}</span>
+        </div>
+        <p class="text-xs uppercase tracking-wide text-white/60  font-bold group-hover:text-(--color-primary) transition-colors font-text">
+            Tallas: <span>{shoe.sizes.join(' - ')}</span>
+        </p>
+    </div>
+</div>
+
+<script>
+    
+    const openImageZoom = (src: string, alt: string) => {
+        const overlay = document.createElement('div');
+        overlay.className = 'fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4';
+
+        const zoomed = document.createElement('img');
+        zoomed.src = src;
+        zoomed.alt = alt;
+        zoomed.className = 'max-w-[95vw] max-h-[90vh] object-contain rounded-xl shadow-2xl';
+
+        overlay.appendChild(zoomed);
+        document.body.appendChild(overlay);
+
+        const closeOverlay = () => {
+            overlay.remove();
+            document.removeEventListener('keydown', onEsc);
+        };
+
+        const onEsc = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') closeOverlay();
+        };
+
+        overlay.addEventListener('click', closeOverlay);
+        zoomed.addEventListener('click', (e) => e.stopPropagation());
+        document.addEventListener('keydown', onEsc);
+    };
+
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const carousels = document.querySelectorAll<HTMLElement>('.image-carousel:not([data-carousel-init])');
+
+    carousels.forEach((carousel) => {
+        carousel.dataset.carouselInit = 'true';
+
+        const imgs = Array.from(carousel.querySelectorAll<HTMLImageElement>('.carousel-img'));
+        if (!imgs.length) return;
+
+        let idx = 0;
+
+        const getActiveImg = () => {
+            const active = imgs.find((img) => img.style.opacity === '1');
+            return active || imgs[idx] || imgs[0];
+        };
+
+        const zoomIn = () => {
+            const active = getActiveImg();
+            if (!active) return;
+            active.style.transform = 'scale(1.18)';
+            active.style.zIndex = '2';
+        };
+
+        const zoomOut = () => {
+            imgs.forEach((img) => {
+                img.style.transform = 'scale(1)';
+                img.style.zIndex = '1';
+            });
+        };
+
+        if (imgs.length > 1) {
+            setInterval(() => {
+                imgs[idx].style.opacity = '0';
+                imgs[idx].style.pointerEvents = 'none';
+                imgs[idx].style.transform = 'scale(1)';
+                imgs[idx].style.zIndex = '1';
+                idx = (idx + 1) % imgs.length;
+                imgs[idx].style.opacity = '1';
+                imgs[idx].style.pointerEvents = 'auto';
+                imgs[idx].style.zIndex = '1';
+            }, 2000);
+        }
+
+        imgs.forEach((img) => {
+            img.addEventListener('click', () => {
+                if (img.style.opacity !== '1') return;
+                zoomOut();
+                openImageZoom(img.src, img.alt || 'Imagen del producto');
+            });
+
+            if (canHover) {
+                img.addEventListener('pointerdown', () => {
+                    if (img.style.opacity !== '1') return;
+                    zoomIn();
+                });
+                img.addEventListener('pointerup', zoomOut);
+                img.addEventListener('pointercancel', zoomOut);
+                img.addEventListener('pointerleave', zoomOut);
+            }
+        });
+    });
+</script>

@@ -1,0 +1,96 @@
+---
+import rawShoes from '../utils/shoes.json';
+
+const currentYear = new Date().getFullYear();
+const categories = Object.keys(rawShoes);
+---
+
+<footer class="relative mt-12 sm:mt-16 border-t border-(--color-primary) bg-white/75 backdrop-blur-sm">
+  <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+
+      <div class="lg:col-span-4 space-y-5">
+        <p class="font-title text-3xl font-bold tracking-tight text-black">SNEAK SHOES</p>
+        <p class="font-text text-sm text-(--color-accent) max-w-md leading-relaxed">
+          Sneakers urbanos y deportivos para el día a día. Consulta disponibilidad por WhatsApp,
+          elige talla y color, y recibe atención personalizada.
+        </p>
+      </div>
+
+      <div class="lg:col-span-2 space-y-4">
+        <p class="font-title text-sm uppercase tracking-[0.18em] text-black">Compra</p>
+        <ul class="grid grid-cols-2 gap-x-3 gap-y-2 font-text text-xs sm:text-sm text-(--color-accent)">
+          {categories.map((category) => (
+            <li>
+              <a href={`#${category}`} class="hover:text-(--color-primary) transition-colors">{category.toUpperCase()}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="lg:col-span-3 space-y-4">
+        <p class="font-text text-sm uppercase tracking-[0.18em] text-black">Atención</p>
+        <ul class="space-y-3 font-text text-sm text-(--color-accent)">
+          <li class="group flex items-center gap-2">
+            <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-black group-hover:text-(--color-primary) transition-colors" fill="none" aria-hidden="true">
+              <path d="M12 21s7-5.7 7-11a7 7 0 10-14 0c0 5.3 7 11 7 11z" stroke="currentColor" stroke-width="1.8"/>
+              <circle cx="12" cy="10" r="2.6" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+            <span class="group-hover:text-black transition-colors">San Cristobal, Venezuela</span>
+          </li>
+          <li class="group flex items-center gap-2">
+            <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-black group-hover:text-(--color-primary) transition-colors" fill="none" aria-hidden="true">
+              <path d="M3 5.5A2.5 2.5 0 015.5 3h2a1 1 0 01.95.68l1 3a1 1 0 01-.24 1.02l-1.2 1.2a14 14 0 006.2 6.2l1.2-1.2a1 1 0 011.02-.24l3 1a1 1 0 01.68.95v2A2.5 2.5 0 0118.5 21h-1C9.6 21 3 14.4 3 6.5v-1z" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+            <a href="tel:+584247217176" class="hover:text-(--color-primary) transition-colors">+58 424 721 7176</a>
+          </li>
+        </ul>
+
+        <div class="flex items-center gap-1 pt-1">
+          <a
+            href="https://wa.me/584247217176"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp atencion"
+            class="h-10 w-10 text-black inline-flex items-center justify-start hover:text-(--color-primary) transition-colors"
+          >
+            <span
+              aria-hidden="true"
+              class="w-5 h-5 bg-current block"
+              style="-webkit-mask-image: url('/whatsapp.svg'); mask-image: url('/whatsapp.svg'); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain;"
+            ></span>
+          </a>
+          
+          <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram atencion"
+            class="h-10 w-10 text-black inline-flex items-center justify-start hover:text-(--color-primary) transition-colors"
+          >
+            <span
+              aria-hidden="true"
+              class="w-5 h-5 bg-current block"
+              style="-webkit-mask-image: url('/instagram.svg'); mask-image: url('/instagram.svg'); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain;"
+            ></span>
+          </a>
+        </div>
+      </div> 
+
+      <div class="lg:col-span-3 space-y-4">
+        <p class="font-text text-sm uppercase tracking-[0.18em] text-black">Confianza</p>
+        <div class="space-y-3">
+          <p class="font-text text-sm text-(--color-accent)">Compra segura y atención personalizada.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-[11px] font-text uppercase tracking-[0.12em] px-2.5 py-1 rounded-full bg-black/5 text-black hover:bg-(--color-primary) hover:text-white transition-colors cursor-default">Verificación rápida</span>
+            <span class="text-[11px] font-text uppercase tracking-[0.12em] px-2.5 py-1 rounded-full bg-black/5 text-black hover:bg-(--color-primary) hover:text-white transition-colors cursor-default">Soporte directo</span> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 sm:mt-10 pt-5 border-t border-black/10 flex flex-col md:flex-row items-center justify-between gap-3">
+      <p class="font-text text-xs text-(--color-accent) text-center md:text-left">© {currentYear} SNEAK SHOES. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>

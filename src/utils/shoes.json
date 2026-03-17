@@ -1,0 +1,339 @@
+{
+    "JORDAN": [
+        {
+            "id": 1,
+            "name": "JORDAN 3 CABALLERO",
+            "price": 30,
+            "images": [
+                "/shoes-category/jordan-3/1.jpeg",
+                "/shoes-category/jordan-3/2.jpeg",
+                "/shoes-category/jordan-3/3.jpeg",
+                "/shoes-category/jordan-3/4.jpeg",
+                "/shoes-category/jordan-3/5.jpeg",
+                "/shoes-category/jordan-3/6.jpeg"
+            ],
+            "sizes": ["38", "39", "40", "41", "42", "43"],
+            "colors": ["Blanco/Rojo", "Blanco/Azul", "Negro", "Blanco", "Negro/Blanco"]
+        },
+        {
+            "id": 2,
+            "name": "JORDAN 1 MID DAMA",
+            "price": 25,
+            "images": [
+                "/shoes-category/jordan-1-mid-fem/1.jpeg",
+                "/shoes-category/jordan-1-mid-fem/2.jpeg",
+                "/shoes-category/jordan-1-mid-fem/3.jpeg"
+            ],
+            "sizes": ["35", "36", "37", "38", "39", "40"],
+            "colors": ["Blanco/Lila", "Negro/Azul", "Negro/Rojo"]
+        },
+        {
+            "id": 3,
+            "name": "JORDAN MARS UNISEX",
+            "price": 30,
+            "images": [
+                "/shoes-category/jordan-mars/1.jpeg",
+                "/shoes-category/jordan-mars/2.jpeg",
+                "/shoes-category/jordan-mars/3.jpeg"
+            ],
+            "sizes": ["35", "36", "37", "38", "39", "40", "41", "42", "43"],
+            "colors": ["Blanco/Lila", "Negro/Azul", "Negro/Rojo"]
+        }
+    ],
+
+    "ADIDAS": [
+        {
+            "id": 4,
+            "name": "ADIDAS CABALLERO",
+            "price": 25,
+            "images": [
+                "/shoes-category/adidas-unisex/1.jpeg",
+                "/shoes-category/adidas-unisex/2.jpeg",
+                "/shoes-category/adidas-unisex/3.jpeg",
+                "/shoes-category/adidas-unisex/4.jpeg"
+            ],
+            "sizes": ["37", "38", "39", "40", "41", "42", "43"],
+            "colors": ["Azul", "Beige", "Negro", "Gris"]
+        },
+        {
+            "id": 5,
+            "name": "ADIDAS STYLE DAMA",
+            "price": 20,
+            "images": [
+                "/shoes-category/adidas-style/1.jpeg",
+                "/shoes-category/adidas-style/2.jpeg",
+                "/shoes-category/adidas-style/3.jpeg",
+                "/shoes-category/adidas-style/4.jpeg"
+            ],
+            "sizes": ["35", "36", "37", "38", "39", "40"],
+            "colors": ["Blanco", "Negro", "Gris", "Blanco/Negro"]
+        },
+        {
+            "id": 6,
+            "name": "ADIDAS TRACER DAMA",
+            "price": 25,
+            "images": [
+                "/shoes-category/adidas-tracer/1.jpeg",
+                "/shoes-category/adidas-tracer/2.jpeg",
+                "/shoes-category/adidas-tracer/3.jpeg",
+                "/shoes-category/adidas-tracer/4.jpeg"
+            ],
+            "sizes": ["35", "36", "37", "38", "39", "40"],
+            "colors": ["Blanco", "Negro", "Gris"]
+        },
+        {
+            "id": 7,
+            "name": "ADIDAS CHAO CABALLERO",
+            "price": 30,
+            "images": [
+                "/shoes-category/adidas-chao/1.jpeg",
+                "/shoes-category/adidas-chao/2.jpeg",
+                "/shoes-category/adidas-chao/3.jpeg",
+                "/shoes-category/adidas-chao/4.jpeg"
+            ],
+            "sizes": ["38", "39", "40", "41", "42", "43"],
+            "colors": ["Blanco", "Negro", "Gris/Verde", "Negro/Rojo"]
+        },
+        {
+            "id": 8,
+            "name": "ADIDAS LONDON CABALLERO",
+            "price": 30,
+            "images": [
+                "/shoes-category/adidas-london/1.jpeg",
+                "/shoes-category/adidas-london/2.jpeg",
+                "/shoes-category/adidas-london/3.jpeg"
+            ],
+            "sizes": ["37", "38", "39", "40", "41", "42", "43"],
+            "colors": ["Blanco", "Negro", "Gris/Negro"]
+        },
+        {
+            "id": 9,
+            "name": "ADIDAS CLOUD DAMA",
+            "price": 25,
+            "images": [
+                "/shoes-category/adidas-cloud/1.jpeg",
+                "/shoes-category/adidas-cloud/2.jpeg",
+                "/shoes-category/adidas-cloud/3.jpeg"
+            ],
+            "sizes": ["35", "36", "37", "38", "39", "40"],
+            "colors": ["Gris", "Negro", "Blanco"]
+        },
+        {
+            "id": 23,
+            "name": "ADIDAS CABALLERO",
+            "price": 25,
+            "images": [
+                "/shoes-category/adidas-caballero/1.jpeg",
+                "/shoes-category/adidas-caballero/2.jpeg",
+                "/shoes-category/adidas-caballero/3.jpeg"
+            ],
+            "sizes": ["37", "38", "39", "40", "41", "42", "43"],
+            "colors": ["Gris", "Negro", "Blanco"]
+        },
+        {
+            "id": 24,
+            "name": "ADIDAS SAMBA DAMA",
+            "price": 20,
+            "images": [
+                "/shoes-category/adidas-samba/1.jpeg",
+                "/shoes-category/adidas-samba/2.jpeg",
+                "/shoes-category/adidas-samba/3.jpeg",
+                "/shoes-category/adidas-samba/4.jpeg"
+            ],
+            "sizes": ["35", "36", "37", "38", "39", "40"],
+            "colors": ["Rosa", "Azul", "Blanco", "Colores"]
+        },
+        {
+            "id": 25,
+            "name": "ADIDAS SUPERNOVA CABALLERO",
+            "price": 25,
+            "images": [
+                "/shoes-category/adidas-supernova/1.jpeg",
+                "/shoes-category/adidas-supernova/2.jpeg"
+            ],
+            "sizes": ["37", "38", "39", "40", "41", "42", "43"],
+            "colors": ["Negro", "Blanco"]
+        },
+        {
+            "id": 26,
+            "name": "ADIDAS SUPERNOVA DAMA",
+            "price": 25,
+            "images": [
+                "/shoes-category/adidas-supernova-fem/1.jpeg",
+                "/shoes-category/adidas-supernova-fem/2.jpeg",
+                "/shoes-category/adidas-supernova-fem/3.jpeg"
+            ],
+            "sizes": ["35", "36", "37", "38", "39", "40"],
+            "colors": ["Gris", "Negro", "Blanco"]
+        }
+    ],
+
+    "NIKE": [
+        {
+            "id": 10,
+            "name": "NIKE AF1 HIGH",
+            "price": 30,
+            "images": [
+                "/shoes-category/nike-af1-high/1.jpeg",
+                "/shoes-category/nike-af1-high/2.jpeg",
+                "/shoes-category/nike-af1-high/3.jpeg",
+                "/shoes-category/nike-af1-high/4.jpeg"
+            ],
+            "sizes": ["35", "36", "37", "38", "39", "40", "41", "42", "43"],
+            "colors": ["Negro", "Blanco"]
+        },
+        {
+            "id": 11,
+            "name": "NIKE ASPA 2.0",
+            "price": 25,
+            "images": [
+                "/shoes-category/nike-aspa/1.jpeg",
+                "/shoes-category/nike-aspa/2.jpeg"
+            ],
+            "sizes": ["35", "36", "37", "38", "39", "40", "41", "42", "43"],
+            "colors": ["Negro", "Blanco"]
+        },
+        {
+            "id": 12,
+            "name": "NIKE BAILLELY DAMA",
+            "price": 25,
+            "images": [
+                "/shoes-category/nike-baillely/1.jpeg",
+                "/shoes-category/nike-baillely/2.jpeg"
+            ],
+            "sizes": ["35", "36", "37", "38", "39", "40"],
+            "colors": ["Blanco/Rosa", "Blanco/Azul"]
+        },
+        {
+            "id": 13,
+            "name": "NIKE ZOOM DAMA",
+            "price": 25,
+            "images": [
+                "/shoes-category/nike-zoom/1.jpeg",
+                "/shoes-category/nike-zoom/2.jpeg"
+            ],
+            "sizes": ["35", "36", "37", "38", "39", "40"],
+            "colors": ["Blanco/Lila", "Blanco/Rosa"]
+        },
+        {
+            "id": 22,
+            "name": "NIKE DAMA",
+            "price": 20,
+            "images": [
+                "/shoes-category/nike-dama/1.jpeg",
+                "/shoes-category/nike-dama/2.jpeg",
+                "/shoes-category/nike-dama/3.jpeg"
+            ],
+            "sizes": ["35", "36", "37", "38", "39", "40"],
+            "colors": ["Blanco/Estampado", "Blanco/Rosa", "Blanco"]
+        }
+    ],
+
+    "NEW BALANCE": [
+        {
+            "id": 14,
+            "name": "NEW BALANCE DAMA",
+            "price": 25,
+            "images": [
+                "/shoes-category/nb-fem/1.jpeg",
+                "/shoes-category/nb-fem/2.jpeg",
+                "/shoes-category/nb-fem/3.jpeg",
+                "/shoes-category/nb-fem/4.jpeg"
+            ],
+            "sizes": ["35", "36", "37", "38", "39", "40"],
+            "colors": ["Negro", "Blanco", "Negro/Blanco", "Blanco/Verde"]
+        },
+        {
+            "id": 15,
+            "name": "NEW BALANCE DONA",
+            "price": 25,
+            "images": [
+                "/shoes-category/nb-dona/1.jpeg",
+                "/shoes-category/nb-dona/2.jpeg",
+                "/shoes-category/nb-dona/3.jpeg",
+                "/shoes-category/nb-dona/4.jpeg"
+            ],
+            "sizes": ["35", "36", "37", "38", "39", "40"],
+            "colors": ["Negro", "Blanco", "Beige", "Blanco/Lila"]
+        }
+    ],
+
+    "PUMA": [
+        {
+            "id": 16,
+            "name": "PUMA RETRO CABALLERO",
+            "price": 25,
+            "images": [
+                "/shoes-category/puma-retro/1.jpeg",
+                "/shoes-category/puma-retro/2.jpeg",
+                "/shoes-category/puma-retro/3.jpeg",
+                "/shoes-category/puma-retro/4.jpeg"
+            ],
+            "sizes": ["37", "38", "39", "40", "41", "42", "43"],
+            "colors": ["Gris", "Gris/Negro", "Beige", "Negro"]
+        },
+        {
+            "id": 17,
+            "name": "PUMA RETRO DAMA",
+            "price": 25,
+            "images": [
+                "/shoes-category/puma-retro-fem/1.jpeg",
+                "/shoes-category/puma-retro-fem/2.jpeg",
+                "/shoes-category/puma-retro-fem/3.jpeg",
+                "/shoes-category/puma-retro-fem/4.jpeg"
+            ],
+            "sizes": ["35", "36", "37", "38", "39", "40"],
+            "colors": ["Rosa", "Beige", "Negro", "Blanco"]
+        },
+        {
+            "id": 18,
+            "name": "PUMA 180",
+            "price": 25,
+            "images": [
+                "/shoes-category/puma-180/1.jpeg"
+            ],
+            "sizes": ["37", "38", "39", "40", "41", "42", "43"],
+            "colors": ["Gris", "Gris/Negro", "Beige", "Negro"]
+        }
+    ],
+
+    "ESPECIALES": [
+        {
+            "id": 19,
+            "name": "AMIRI",
+            "price": 30,
+            "images": [
+                "/shoes-category/amiri/1.jpeg",
+                "/shoes-category/amiri/2.jpeg",
+                "/shoes-category/amiri/3.jpeg",
+                "/shoes-category/amiri/4.jpeg"
+            ],
+            "sizes": ["37", "38", "39", "40", "41", "42", "43"],
+            "colors": ["Negro", "Blanco", "Beige", "Blanco/Negro"]
+        },
+        {
+            "id": 20,
+            "name": "CAT CABALLERO",
+            "price": 25,
+            "images": [
+                "/shoes-category/cat/1.jpeg",
+                "/shoes-category/cat/2.jpeg"
+            ],
+            "sizes": ["37", "38", "39", "40", "41", "42", "43"],
+            "colors": ["Marrón", "Beige"]
+        },
+        {
+            "id": 21,
+            "name": "TOMMY HILFIGER DAMA",
+            "price": 20,
+            "images": [
+                "/shoes-category/tommy-dama/1.jpeg",
+                "/shoes-category/tommy-dama/2.jpeg",
+                "/shoes-category/tommy-dama/3.jpeg"
+            ],
+            "sizes": ["35", "36", "37", "38", "39", "40"],
+            "colors": ["Negro", "Blanco", "Blanco/Rosa"]
+        }
+    ]
+}
+

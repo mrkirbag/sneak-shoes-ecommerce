@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+* , *::before, *::after {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('/fonts/Roboto-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSans';
+    src: url('/fonts/OpenSans-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@theme {
+    --font-text: 'OpenSans', sans-serif;
+    --font-title: 'Roboto', sans-serif;
+}
+
+:root {
+    --color-primary: #b80018;
+    --color-accent: #898989;
+    --color-primary-rgb: 184, 0, 24;
+    --color-white-rgb: 255, 255, 255;
+    --color-accent-rgb: 137, 137, 137;
+    --color-black-rgb: 0, 0, 0;
+}
+
+.filter-active {
+    background-color: var(--color-primary);
+    color: white;
+    box-shadow: 0 4px 6px black;
+}
+
+.filter-inactive {
+    background-color: white;
+    color: black;
+}
